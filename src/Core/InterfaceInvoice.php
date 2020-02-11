@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Setapp\Test\Core;
 
+use Setapp\Test\Payments\Processor\AbstractProcessor;
+
 interface InterfaceInvoice
 {
     /**
@@ -20,9 +22,6 @@ interface InterfaceInvoice
      */
     public function getAmount(): string;
 
-    /**
-     * @return string
-     */
-    public function getProvider(): string;
+    public function getProcessor(): AbstractProcessor;
 }
 

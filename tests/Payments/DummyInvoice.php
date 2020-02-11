@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Setapp\Test\Tests\Payments;
 
 use Setapp\Test\Core\InterfaceInvoice;
+use Setapp\Test\Payments\Processor\AbstractProcessor;
 
 class DummyInvoice implements InterfaceInvoice
 {
@@ -13,21 +14,15 @@ class DummyInvoice implements InterfaceInvoice
     protected $customerId;
     /** @var string */
     protected $amount;
-    /** @var string */
-    protected $provider;
+    /** @var AbstractProcessor */
+    protected $processor;
 
-    /**
-     * @param int $id
-     * @param int $customerId
-     * @param string $amount
-     * @param string $provider
-     */
-    public function __construct(string $id, int $customerId, string $amount, string $provider)
+    public function __construct(string $id, int $customerId, string $amount, AbstractProcessor $processor)
     {
         $this->id = $id;
         $this->customerId = $customerId;
         $this->amount = $amount;
-        $this->provider = $provider;
+        $this->processor = $processor;
     }
 
     /**
@@ -54,11 +49,8 @@ class DummyInvoice implements InterfaceInvoice
         return $this->amount;
     }
 
-    /**
-     * @return string
-     */
-    public function getProvider(): string
+    public function getProcessor(): AbstractProcessor
     {
-        return $this->provider;
+        return $this->processor;
     }
 }
